@@ -2,10 +2,9 @@
 
 A [Visual Studio Code](https://code.visualstudio.com/) [extension](https://marketplace.visualstudio.com/items?itemName=donjayamanne.jupyterpowertools) that provides some useful features to enhance Jupyter Notebooks.
 
-<img src=https://raw.githubusercontent.com/DonJayamanne/vscode-jupyterpowertools/main/images/main.gif>
-
 # Features
 * Shrink traceback to see just the error.
+* Cell magics (& code completion for cell magics)
 * Generate slideshows and preview it
 * Edit cell metadata (tags, slide)
 * Display errors are diagnostic errors in the editor (avoids the need to try to map line numbers in output to lines in cell)
@@ -19,8 +18,27 @@ A [Visual Studio Code](https://code.visualstudio.com/) [extension](https://marke
   "jupyter.showCellSlidesStatusbar": false,
   "jupyter.showCellTagsStatusBar": false,
 ```
+* Command used to convert Jupyter Notebooks into HTML slides
+```json
+"jupyter.nbConvertToSlidesCommand": "<path_to_ python_executable> -m jupyter nbconvert --to slides",
+// or
+"jupyter.nbConvertToSlidesCommand": "jupyter nbconvert --to slides",
+```
 
 ## Shrinking Traceback
+<img src=https://raw.githubusercontent.com/DonJayamanne/vscode-jupyterpowertools/master/images/errors.gif>
+
+## Editing tags
+<img src=https://raw.githubusercontent.com/DonJayamanne/vscode-jupyterpowertools/master/images/tags.gif>
+
+## Converting cells
+<img src=https://raw.githubusercontent.com/DonJayamanne/vscode-jupyterpowertools/master/images/convertCell.gif>
+
+## Cell Magics
+<img src=https://raw.githubusercontent.com/DonJayamanne/vscode-jupyterpowertools/master/images/cellMagics.gif>
+
+## Convert notebook Slide Shows (reveal.js)
+<img src=https://raw.githubusercontent.com/DonJayamanne/vscode-jupyterpowertools/master/images/slides.gif>
 
 # Coming Soon
 * Finer grained control of errors (see first n lines of traceback, useful if the traceback is 50lines long)
