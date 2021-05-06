@@ -11,6 +11,12 @@ A [Visual Studio Code](https://code.visualstudio.com/) [extension](https://marke
 * Automatic syntax highlighting of cell magics (e.g. using `%%html` will provide syntax highlighting and language features for `HTML` in the cell)
 * Toggle cell from Markdown to Cell with toolbar icon (and vice versa)
 
+# Getting Started
+* Please install VS Code Insiders (stable is not yet supported)
+* Install this extension
+* Launch VS Code with the following command line `code-insiders --enable-proposed-api=donjayamanne.jupyterpowertools`
+* Open a Jupyter Notebook
+
 ## Settings
 * Hide the status bar contributions
 ```json
@@ -47,6 +53,9 @@ A [Visual Studio Code](https://code.visualstudio.com/) [extension](https://marke
 * View cell execution times
 * Install missing dependencies
 * Icon to create raw cells.
+* Initialization cells
+* Notifications when executions complete
+* Managing Jupyter Hub
 
 ### Where is the source?
 * Will be published soon.
