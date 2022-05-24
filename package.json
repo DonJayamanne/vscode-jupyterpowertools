@@ -211,6 +211,7 @@
         "postinstall": "npm run download-api"
     },
     "dependencies": {
+        "debundle": "^0.5.4",
         "fs-extra": "^10.0.0",
         "strip-ansi": "^6.0.0",
         "tmp": "^0.2.1"
