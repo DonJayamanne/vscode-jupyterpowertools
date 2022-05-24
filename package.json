@@ -1,0 +1,259 @@
+{
+    "name": "jupyterpowertools",
+    "displayName": "Jupyter Power Tools",
+    "description": "Power tools for Jupyter Notebooks",
+    "version": "0.0.4",
+    "engines": {
+        "vscode": "1.57.0-insider"
+    },
+    "publisher": "donjayamanne",
+    "enableProposedApi": true,
+    "author": {
+        "name": "Don Jayamanne"
+    },
+    "license": "MIT",
+    "homepage": "https://github.com/DonJayamanne/vscode-jupyterpowertools",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DonJayamanne/vscode-jupyterpowertools"
+    },
+    "bugs": {
+        "url": "https://github.com/DonJayamanne/vscode-jupyterpowertools/issues"
+    },
+    "preview": true,
+    "icon": "icon.png",
+    "galleryBanner": {
+        "color": "#ffffff",
+        "theme": "light"
+    },
+    "keywords": [
+        "jupyter",
+        "notebook",
+        "ipynb",
+        "multi-root ready"
+    ],
+    "categories": [
+        "Other",
+        "Notebooks",
+        "Data Science",
+        "Machine Learning",
+        "Visualization"
+    ],
+    "activationEvents": [
+        "onNotebook:jupyter-notebook",
+        "onLanguage:python",
+        "onCommand:jupyter.notebook.toJupyterSlides"
+    ],
+    "extensionDependencies": [
+        "ms-toolsai.jupyter"
+    ],
+    "main": "./out/extension/index.js",
+    "contributes": {
+        "configuration": {
+            "type": "object",
+            "properties": {
+                "jupyter.nbConvertToSlidesCommand": {
+                    "type": "string",
+                    "default": "jupyter nbconvert --to slides",
+                    "description": "Command used to convert a Jupyter Notebook into a [HTML slideshow](https://nbconvert.readthedocs.io/en/latest/usage.html#reveal-js-html-slideshow)."
+                },
+                "jupyter.showCellSlidesStatusbar": {
+                    "type": "boolean",
+                    "default": true,
+                    "scope": "application",
+                    "description": "Displays the Cell Slides entry in the Notebook Cell Statubar"
+                },
+                "jupyter.showCellTagsStatusBar": {
+                    "type": "boolean",
+                    "default": true,
+                    "scope": "application",
+                    "description": "Displays the Cell Tag entries in the Notebook Cell Statubar"
+                },
+                "jupyter.showCellAddTagsStatusBar": {
+                    "type": "boolean",
+                    "default": true,
+                    "scope": "application",
+                    "description": "Displays the 'Tags +' entry in the Notebook Cell Statubar"
+                }
+            }
+        },
+        "commands": [
+            {
+                "category": "Notebook",
+                "command": "jupyter.cell.addAttachment",
+                "icon": "$(file-media)",
+                "title": "Insert Image"
+            },
+            {
+                "category": "Notebook",
+                "command": "jupyter.notebook.toJupyterSlides",
+                "icon": "$(mirror)",
+                "title": "Export to Slides",
+                "enablement": "notebookViewType == jupyter-notebook"
+            },
+            {
+                "category": "Notebook",
+                "command": "jupyter.cell.changeSlideType",
+                "title": "Configure Cell for slideshow",
+                "enablement": "notebookViewType == jupyter-notebook"
+            },
+            {
+                "category": "Notebook",
+                "command": "jupyter.cell.switchToMarkdownCell",
+                "title": "Switch to Markdown Cell",
+                "icon": "$(markdown)"
+            },
+            {
+                "category": "Notebook",
+                "command": "jupyter.cell.switchToCodeCell",
+                "title": "Switch to Code Cell",
+                "icon": "$(code)"
+            },
+            {
+                "category": "Notebook",
+                "command": "jupyter.cell.switchToRawCell",
+                "title": "Switch to Raw Cell",
+                "icon": "$(file-binary)"
+            }
+        ],
+        "menus": {
+            "commandPalette": [
+                {
+                    "command": "jupyter.cell.switchToMarkdownCell",
+                    "when": "config.never"
+                },
+                {
+                    "command": "jupyter.cell.switchToCodeCell",
+                    "when": "config.never"
+                },
+                {
+                    "command": "jupyter.cell.switchToRawCell",
+                    "when": "config.never"
+                },
+                {
+                    "command": "jupyter.cell.addAttachment",
+                    "when": "config.never"
+                },
+                {
+                    "command": "jupyter.cell.changeSlideType",
+                    "when": "config.never"
+                }
+            ],
+            "editor/title": [
+                {
+                    "command": "jupyter.notebook.toJupyterSlides",
+                    "title": "Export to Slides",
+                    "group": "navigation@1",
+                    "when": "notebookViewType == 'jupyter-notebook'"
+                }
+            ],
+            "editor/context": [],
+            "view/item/context": [],
+            "notebook/cell/title": [
+                {
+                    "command": "jupyter.cell.switchToMarkdownCell",
+                    "title": "Switch to Markdown Cell",
+                    "group": "inline/cell@0",
+                    "when": "notebookViewType == 'jupyter-notebook' && notebookCellType == code"
+                },
+                {
+                    "command": "jupyter.cell.switchToCodeCell",
+                    "title": "Switch to Code Cell",
+                    "group": "inline/cell@0",
+                    "when": "notebookViewType == 'jupyter-notebook' && notebookCellType == markdown"
+                },
+                {
+                    "command": "jupyter.cell.switchToRawCell",
+                    "title": "Switch to Raw Cell",
+                    "group": "inline/cell@0",
+                    "when": "notebookViewType == 'jupyter-notebookxxxx'"
+                },
+                {
+                    "command": "jupyter.cell.addAttachment",
+                    "title": "Insert Image",
+                    "group": "inline/cell@0",
+                    "when": "notebookViewType == 'jupyter-notebookxxx' && notebookCellType == markdown"
+                }
+            ]
+        },
+        "notebookOutputRenderer": [
+            {
+                "id": "jupyter-notebook-traceback-renderer",
+                "entrypoint": "./out/renderer/tracebackRenderer.js",
+                "displayName": "Minimalist Jupyter Traceback Renderer",
+                "mimeTypes": [
+                    "application/x.notebook.error-traceback"
+                ]
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile:webpack",
+        "dev": "concurrently -r npm:compile:extension:watch npm:compile:client:watch npm:compile:test:watch",
+        "compile": "npm run compile:extension && npm run compile:test && npm run compile:client",
+        "compile:extension": "tsc -p src/extension",
+        "compile:extension:watch": "tsc -p src/extension --watch",
+        "compile:test": "tsc -p src/test",
+        "compile:test:watch": "tsc -p src/test --watch",
+        "compile:webpack": "npm run build:client && npm run build:extension",
+        "compile:client": "webpack --config=build/webpack/webpack.client.config.js",
+        "build:client": "webpack --config=build/webpack/webpack.client.config.js --mode=production",
+        "build:extension": "webpack --config=build/webpack/webpack.extension.config.js --mode=production",
+        "compile:client:watch": "webpack --config=build/webpack/webpack.client.config.js --watch",
+        "lint": "eslint src --ext ts && eslint src --ext tsx && eslint build --ext js",
+        "lint-format": "npx prettier 'src/**/*.ts*' --check && npx prettier 'build/**/*.js' --check",
+        "watch": "tsc -watch -p ./",
+        "package": "vsce package --yarn -o jupyter-powertools.vsix",
+        "test": "node ./out/test/runTest.js",
+        "prettier-fix": "prettier 'src/**/*.ts*' --write && prettier 'build/**/*.js' --write",
+        "download-api": "vscode-dts dev",
+        "postdownload-api": "vscode-dts main",
+        "postinstall": "npm run download-api"
+    },
+    "dependencies": {
+        "fs-extra": "^10.0.0",
+        "strip-ansi": "^6.0.0",
+        "tmp": "^0.2.1"
+    },
+    "devDependencies": {
+        "@types/fs-extra": "^9.0.11",
+        "@types/glob": "^7.1.1",
+        "@types/lodash": "^4.14.158",
+        "@types/mocha": "^7.0.2",
+        "@types/node": "^12.11.7",
+        "@types/strip-ansi": "^5.2.1",
+        "@types/tmp": "^0.2.0",
+        "@types/vscode": "^1.54.0",
+        "@types/vscode-notebook-renderer": "^1.57.0",
+        "@typescript-eslint/eslint-plugin": "^3.1.0",
+        "@typescript-eslint/parser": "^3.1.0",
+        "cache-loader": "^4.1.0",
+        "concurrently": "^5.2.0",
+        "copy-webpack-plugin": "^6.0.2",
+        "css-loader": "^3.5.3",
+        "eslint": "^7.1.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-prettier": "^3.1.3",
+        "fork-ts-checker-webpack-plugin": "^4.1.6",
+        "glob": "^7.1.6",
+        "ify-loader": "^1.1.0",
+        "install": "^0.13.0",
+        "less": "^3.11.3",
+        "mocha": "^7.2.0",
+        "npm": "^6.14.5",
+        "prettier": "^2.0.5",
+        "style-loader": "^1.2.1",
+        "svg-inline-loader": "^0.8.2",
+        "thread-loader": "^2.1.3",
+        "transform-loader": "^0.2.4",
+        "ts-loader": "^7.0.5",
+        "typescript": "^3.9.3",
+        "url-loader": "^4.1.0",
+        "vscode-dts": "^0.3.1",
+        "vscode-test": "^1.4.0",
+        "webpack": "^4.43.0",
+        "webpack-bundle-analyzer": "^3.8.0",
+        "webpack-cli": "^3.3.11",
+        "webpack-fix-default-import-plugin": "^1.0.3"
+    }
+}
